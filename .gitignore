@@ -10,4 +10,5 @@ CTestTestfile.cmake
 *.json
 *.exe
 *.o
+.DS_Store
 
