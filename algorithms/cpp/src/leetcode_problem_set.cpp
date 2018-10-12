@@ -628,6 +628,38 @@ class Solution
         
         return false;
     }
+
+    // 11. Container With Most Water
+    /*
+    Given n non-negative integers a1, a2, ..., an , where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i, ai) and (i, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water.
+    Note: You may not slant the container and n is at least 2.
+    
+    Example:
+    Input: [1,8,6,2,5,4,8,3,7]
+    Output: 49
+    */
+    // brute force: O(n^2)
+    int maxArea_slow(vector<int>& height) {
+        int maxValue = 0;
+        const size_t size = height.size();
+        for (size_t id1 = 0; id1 < size; ++ id1) {
+            for (size_t id2 = id1 + 1; id2 < size; ++ id2) {
+                const int value = min(height[id1], height[id2]) * (id2 - id1);
+                maxValue = value > maxValue ? value : maxValue;
+            }
+        }
+        return maxValue;
+    }
+    // two pointer: O(n)
+    int maxArea(vector<int>& height) {
+        int maxValue = 0;
+        const size_t size = height.size();
+        for (size_t id1 = 0, id2 = size - 1; id1 < id2; height[id1] < height[id2] ? (++ id1) : (-- id2)) {
+            const int value = min(height[id1], height[id2]) * (id2 - id1);
+            maxValue = value > maxValue ? value : maxValue;
+        }
+        return maxValue;
+    }
 };
 
 
@@ -671,7 +703,11 @@ int main()
     //cout << Solution().isPalindrome(121) << endl;
 
     // 10. Regular Expression Matching
-    cout << Solution().isMatch("", "c*c*") << endl;
+    //cout << Solution().isMatch("", "c*c*") << endl;
+
+    // 11. Container With Most Water
+    vector<int> vec = {1,8,6,2,5,4,8,3,7};
+    cout << Solution().maxArea(vec) << endl;
 
     system("pause");
     return 0;
