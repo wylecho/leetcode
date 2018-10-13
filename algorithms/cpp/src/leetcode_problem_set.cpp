@@ -684,7 +684,19 @@ class Solution
     Given an integer, convert it to a roman numeral. Input is guaranteed to be within the range from 1 to 3999.
     */
     string intToRoman(int num) {
+        const vector<int> strInt = {1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000};
+        const vector<string> intStr = {"I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M"};
         
+        string retStr;
+        size_t id =  strInt.size() - 1;
+        while (num) {
+            for (int i = 0; i < num / strInt[id]; ++ i) {
+                retStr += intStr[id];
+            }
+            num %= strInt[id];
+            -- id;
+        }
+        return retStr;
     }
 
     // 13. Roman to Integer
@@ -771,8 +783,11 @@ int main()
     //vector<int> vec = {1,8,6,2,5,4,8,3,7};
     //cout << Solution().maxArea(vec) << endl;
 
+    // 12. Integer to Roman
+    cout << Solution().intToRoman(1994) << endl;
+
     // 13. Roman to Integer
-    cout << Solution().romanToInt("MCMXCIV") << endl;
+    //cout << Solution().romanToInt("MCMXCIV") << endl;
 
     system("pause");
     return 0;
