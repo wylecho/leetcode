@@ -734,6 +734,63 @@ class Solution
         } 
         return retValue;
     }
+
+    // 14. Longest Common Prefix
+    /*
+    Write a function to find the longest common prefix string amongst an array of strings.
+
+    If there is no common prefix, return an empty string "".
+
+    Example 1:
+    Input: ["flower","flow","flight"]
+    Output: "fl"
+    
+    Example 2:
+    Input: ["dog","racecar","car"]
+    Output: ""
+    Explanation: There is no common prefix among the input strings.
+ 
+    Note:
+    All given inputs are in lowercase letters a-z.
+    */
+    string longestCommonPrefix(vector<string>& strs) {
+        const size_t strsSize = strs.size();
+        if (0 == strsSize) {
+            return string();
+        }
+
+        int count = 0;
+        for (size_t id = 0; id < strs[0].length(); ++ id) {
+            size_t strIdx = 1;
+            while (strIdx < strsSize && strs[0][id] == strs[strIdx][id]) {
+                ++ strIdx;
+            }
+            if (strIdx < strsSize) {
+                break;
+            }
+            ++ count;
+        }
+        return string(strs[0], 0, count); 
+    }
+
+    // 15. 3 Sum
+    /*
+    Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.
+
+    Note:
+    The solution set must not contain duplicate triplets.
+
+    Example:
+    Given array nums = [-1, 0, 1, 2, -1, -4],
+    A solution set is:
+    [
+    [-1, 0, 1],
+    [-1, -1, 2]
+    ]
+    */
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        
+    }
 };
 
 
@@ -784,11 +841,15 @@ int main()
     //cout << Solution().maxArea(vec) << endl;
 
     // 12. Integer to Roman
-    cout << Solution().intToRoman(1994) << endl;
+    //cout << Solution().intToRoman(1994) << endl;
 
     // 13. Roman to Integer
     //cout << Solution().romanToInt("MCMXCIV") << endl;
 
+    // // 14. Longest Common Prefix
+    vector<string> strVec = {"dog","racecar","car"};
+    cout << Solution().longestCommonPrefix(strVec) << endl;
+    
     system("pause");
     return 0;
 }
